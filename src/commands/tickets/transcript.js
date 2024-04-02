@@ -12,7 +12,6 @@ const guildSettings = require('../../database/models/guildSettings');
 
 module.exports = async (client, interaction, args) => {
     const guild = await guildSettings.findOne({ guildId: interaction.guild.id });
-    if (!interaction.member.roles.cache.some(role => role.id === guild.tickets.supportRole)) return;
 
     var filters = {};
     try {

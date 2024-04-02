@@ -1,22 +1,22 @@
 const redisClient = require('./redisConnect');
 
-const redisSubscriber = redisClient.duplicate();
+const redisPublisher = redisClient.duplicate();
 
-redisSubscriber.connect();
+redisPublisher.connect();
 
-redisSubscriber.on('connect', () => {
+redisPublisher.on('connect', () => {
     console.log('   ▢ Connesso al publisher Redis');
 });
 
 function publish(channel, message) {
-    if (!redisSubscriber) {
-        redisSubscriber.connect();
+    if (!redisPublisher) {
+        redisPublisher.connect();
     }
     try {
-        redisSubscriber.publish(channel, message);
+        redisPublisher.publish(channel, message);
     } catch (err) {
         console.error('Errore di pubblicazione: ', err);
     }
 }
 
-module.exports = { publish };
+module.exports = { publish, redisPublisher };

@@ -11,7 +11,6 @@ const guildSettings = require('../../database/models/guildSettings');
 
 module.exports = async (client, interaction, args) => {
     const guild = await guildSettings.findOne({ guildId: interaction.guild.id });
-    if (!interaction.member.roles.cache.some(role => role.id === guild.tickets.supportRole)) return;
 
     const ticket = await tickets.findOne({ channel: interaction.channel.id });
     if (!ticket) return interaction.reply({ content: 'Questo canale non è un ticket', ephemeral: true });
@@ -26,7 +25,7 @@ module.exports = async (client, interaction, args) => {
             .setPlaceholder('Seleziona la nuova categoria del ticket')
             .setMaxValues(1)
             .addOptions(ticketCategories.map(option => ({
-                label: (option.queueStatus ? option.label : `🔓 ${option.label}`),
+                label: `${option.queueStatus ? '' : '🔓 '}${option.hidden ? '👁️ ' : ''}${option.label}`,
                 value: option.value,
                 description: (option.queueStatus ? option.description : `Categoria bloccata agli utenti, puoi spostare il ticket.`),
                 emoji: option.emoji

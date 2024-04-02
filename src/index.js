@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const { publish } = require('./redis/publisher');
 require('dotenv').config();
 
 const client = new Discord.Client({
@@ -29,7 +28,8 @@ client.on('ready', () => {
 
 require('./database/mongoDBConnect');
 
-require('./redis/redisConnect');
+// if (process.env.REDIS_ENABLED === 'true')
+//     require('./redis/redisConnect');
 
 client.commands = new Discord.Collection();
 

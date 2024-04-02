@@ -10,21 +10,16 @@ const settings = require('../../database/models/guildSettings');
  */
 
 module.exports = async (client, interaction, args) => {
-    const role = interaction.options.getRole('role');
+    const channel = interaction.options.getChannel('channel');
 
     const guildSettings = await settings.findOne({ guildId: interaction.guild.id });
     if (!guildSettings) return interaction.reply({ content: 'Please setup the bot first', ephemeral: true });
 
     try {
-        if (guildSettings.tickets.supportRole.includes(role.id)) {
-            guildSettings.tickets.supportRole.splice(guildSettings.tickets.supportRole.indexOf(role.id), 1);
-            interaction.reply({ content: `Ruolo di supporto rimosso correttamente`, ephemeral: true });
-        } else {
-            guildSettings.tickets.supportRole.push(role.id);
-            interaction.reply({ content: `Ruolo di supporto settato correttamente`, ephemeral: true });
-        }
+        guildSettings.giveawayChannel = channel.id;
         await guildSettings.save().catch(err => { throw err });
+        interaction.reply({ content: 'Giveaway channel set', ephemeral: true });
     } catch (error) {
-        return interaction.reply({ content: `Errore durante il settaggio del ruolo: ${error}`, ephemeral: true });
+        return interaction.reply({ content: `Errore durante il settaggio del canale: ${error}`, ephemeral: true });
     }
 }

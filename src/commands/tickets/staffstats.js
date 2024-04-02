@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const tickets = require('../../database/models/tickets');
-const guildSettings = require('../../database/models/guildSettings');
 
 /**
  * 
@@ -10,9 +9,6 @@ const guildSettings = require('../../database/models/guildSettings');
  */
 
 module.exports = async (client, interaction, args) => {
-    const guild = await guildSettings.findOne({ guildId: interaction.guild.id });
-    if (!interaction.member.roles.cache.some(role => role.id === guild.tickets.supportRole)) return;
-
     const user = interaction.options.getUser('user') || interaction.user;
 
     const ticketFeedback = await tickets.find({ operator: user.id, ticketReviewComment: { $ne: null }, ticketReview: true });

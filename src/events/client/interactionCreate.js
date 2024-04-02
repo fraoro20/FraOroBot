@@ -90,6 +90,10 @@ module.exports = async (client, interaction) => {
 
             case 'deny_unban':
                 return require(`${process.cwd()}/src/commands/request/requestDeny.js`)(client, interaction);
+
+            case 'giveaway_join': {
+                return require(`${process.cwd()}/src/commands/giveaway/join.js`)(client, interaction);
+            }
         }
     }
 

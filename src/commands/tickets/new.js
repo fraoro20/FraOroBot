@@ -19,7 +19,7 @@ module.exports = async (client, interaction, args) => {
 
     if (guild.tickets.categories.length === 0) return interaction.reply({ content: 'Non ci sono categorie di ticket disponibili', ephemeral: true });
 
-    let ticketCategories = guild.tickets.categories;
+    let ticketCategories = guild.tickets.categories.filter(category => category.hidden === false);
 
     const row = new Discord.ActionRowBuilder().addComponents(
         new Discord.StringSelectMenuBuilder()
@@ -52,7 +52,7 @@ module.exports = async (client, interaction, args) => {
     let ticketCategoryDescription = ticketCategories.find(category => category.value === ticketCategory.toLowerCase()).description;
 
     const logChannel = interaction.guild.channels.cache.get(guild.tickets.logChannel);
-    const supportRole = interaction.guild.roles.cache.get(guild.tickets.supportRole);
+    const supportRole = interaction.guild.roles.cache.get(guild.tickets.supportRole[0]);
 
     const rowTicket = new Discord.ActionRowBuilder()
         .addComponents(

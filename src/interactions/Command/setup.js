@@ -5,6 +5,7 @@ module.exports = {
         .setName('setup')
         .setDefaultMemberPermissions(Discord.PermissionsBitField.Flags.ManageGuild)
         .setDescription('Setup the bot')
+        .setDMPermission(false)
         .addSubcommandGroup(subcommandGroup => subcommandGroup
             .setName('tickets')
             .setDescription('Setup tickets')
@@ -54,6 +55,15 @@ module.exports = {
                     .setDescription('The ticket transcripts channel')
                     .setRequired(true)
                 )
+            )
+        )
+        .addSubcommand(subcommand => subcommand
+            .setName('giveaway-channel')
+            .setDescription('Setup the giveaway channel')
+            .addChannelOption(option => option
+                .setName('channel')
+                .setDescription('The giveaway channel')
+                .setRequired(true)
             )
         )
     ,

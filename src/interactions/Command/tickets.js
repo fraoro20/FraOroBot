@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const guildSettings = require('../../database/models/guildSettings');
 
 module.exports = {
     data: new Discord.SlashCommandBuilder()
@@ -139,6 +140,24 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        switch (interaction.options.getSubcommand()) {
+            case 'claim':
+            case 'notify':
+            case 'blacklist':
+            case 'move':
+            case 'adduser':
+            case 'removeuser':
+            case 'staffstats':
+            case 'transcript':
+            case 'delete':
+            case 'info':
+            case 'list': {
+                // Check if the user has the required permissions
+                const guild = await guildSettings.findOne({ guildId: interaction.guild.id });
+                if (!guild.tickets.supportRole.some(role => interaction.member.roles.cache.has(role)))
+                    return interaction.reply({ content: 'Errore: Non hai il permesso di eseguire questo comando.', ephemeral: true })
+            }
+        }
         client.loadSubcommands(client, interaction, args);
     }
 }

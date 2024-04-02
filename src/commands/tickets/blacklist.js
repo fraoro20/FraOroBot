@@ -13,7 +13,6 @@ module.exports = async (client, interaction, args) => {
     const user = interaction.options.getUser('user');
 
     const guild = await guildSettings.findOne({ guildId: interaction.guild.id });
-    if (!interaction.member.roles.cache.some(role => role.id === guild.tickets.supportRole)) return;
     if (!guild) return interaction.reply({ content: 'Errore durante il caricamento delle impostazioni del server', ephemeral: true });
 
     if (guild.tickets.userBlacklist.includes(user.id)) {

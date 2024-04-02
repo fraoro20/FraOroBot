@@ -6,19 +6,21 @@ const ticketCategory = new mongoose.Schema({
     label: String,
     description: String,
     emoji: String,
-    queueStatus: Boolean,
+    queueStatus: { type: Boolean, default: true },
+    hidden: { type: Boolean, default: false },
     category: String
 });
 
 const Schema = new mongoose.Schema({
     guildId: String,
     tickets: {
-        supportRole: String,
+        supportRole: [String],
         logChannel: String,
         transcriptChannel: String,
         userBlacklist: Array,
         categories: [ticketCategory]
-    }
+    },
+    giveawayChannel: String,
 });
 
 module.exports = mongoConnect.model('guildSettings', Schema);
