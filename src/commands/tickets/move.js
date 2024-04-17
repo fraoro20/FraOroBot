@@ -44,6 +44,7 @@ module.exports = async (client, interaction, args) => {
     if (newticketCategory === ticket.category) return interaction.editReply({ content: 'Il ticket è già in questa categoria', components: [], ephemeral: true });
 
     let ticketCategoryDescription = ticketCategories.find(category => category.value === newticketCategory.toLowerCase()).description;
+    let ticketCategoryLabel = ticketCategories.find(category => category.value === newticketCategory.toLowerCase()).label;
 
     try {
         await interaction.channel.setParent(ticketCategories.find(category => category.value === newticketCategory.toLowerCase()).category);
@@ -62,7 +63,7 @@ module.exports = async (client, interaction, args) => {
             }
 
             const embed = new Discord.EmbedBuilder()
-                .setDescription(`Il ticket è stato spostato nella categoria ${newticketCategory} da ${interaction.user}`)
+                .setDescription(`Il ticket è stato spostato in **${ticketCategoryLabel}** da ${interaction.user}`)
                 .setColor('#2b2d31')
 
             channel.send({ embeds: [embed] });

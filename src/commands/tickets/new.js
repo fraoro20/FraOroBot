@@ -70,8 +70,10 @@ module.exports = async (client, interaction, args) => {
                 .setStyle(Discord.ButtonStyle.Primary),
         );
 
+
     try {
         let ticketId = generateTicketID(5);
+        let ticketCategoryLabel = ticketCategories.find(category => category.value === ticketCategory.toLowerCase()).label;
         await interaction.guild.channels.create({
             name: `${ticketCategory}-${interaction.user.tag}`,
             topic: `#${ticketId} - ${ticketCategoryDescription}`,
@@ -89,7 +91,7 @@ module.exports = async (client, interaction, args) => {
             }).save();
 
             const embed = new Discord.EmbedBuilder()
-                .setAuthor({ name: `${ticketCategory}`, iconURL: interaction.user.avatarURL({ size: 1024 }) })
+                .setAuthor({ name: `${ticketCategoryLabel}`, iconURL: interaction.user.avatarURL({ size: 1024 }) })
                 .setDescription(`${interaction.user}, spiega il tuo problema in dettaglio e attendi un membro dello staff (${supportRole}) che ti aiuterà.\nSii paziente, i nostri membri dello staff sono volontari e ti aiuteranno il prima possibile.`)
                 .setColor('#2b2d31')
                 .addFields([

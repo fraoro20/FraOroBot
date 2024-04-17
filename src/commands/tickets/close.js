@@ -197,7 +197,7 @@ module.exports = async (client, interaction, args) => {
                         .addComponents(
                             new Discord.ActionRowBuilder().addComponents(
                                 new Discord.TextInputBuilder()
-                                    .setLabel(`Perché hai valutato ${i.component.label}?`)
+                                    .setLabel(`Perché hai valutato ${i.component.label} ⭐?`)
                                     .setStyle(Discord.TextInputStyle.Paragraph)
                                     .setMinLength(1)
                                     .setRequired(false)
@@ -223,7 +223,7 @@ module.exports = async (client, interaction, args) => {
                 });
 
                 collector.on('end', async () => {
-                    (await message).edit({ components: [] });
+                    (await message).edit({ components: [], content: `Valuta il servizio ricevuto utilizzando il comando /ticket review ${ticket.ticketId} nel server` });
                 });
             }
         }).catch(err => { throw err; });

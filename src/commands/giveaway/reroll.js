@@ -18,13 +18,13 @@ module.exports = async (client, interaction, args) => {
 
     if (!giveaway.ended) return interaction.reply({ content: 'Questo giveaway non è ancora terminato!', ephemeral: true });
 
-    giveaway.winners.forEach(async (winner) => {
-        giveaway.joinedUsers.splice(giveaway.joinedUsers.indexOf(winner), 1);
+    let users = giveaway.joinedUsers;
+
+    giveaway.winners.forEach(winner => {
+        users.splice(users.indexOf(winner), 1);
     });
 
-    const newWinners = await getWinners(giveaway.joinedUsers, giveaway.nWinners);
-
-    if (newWinners.length === 0) return interaction.reply({ content: 'Non ci sono abbastanza partecipanti per rilanciare il giveaway', ephemeral: true });
+    const newWinners = await getWinners(users, giveaway.nWinners);
 
     interaction.reply({ content: `Hai rilanciato il giveaway! I nuovi vincitori sono: ${newWinners.length > 0 ? newWinners.map(winner => `<@${winner}>`).join(', ') : 'Nessun vincitore'}`, ephemeral: true });
 }

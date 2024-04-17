@@ -29,8 +29,8 @@ module.exports = async (client, interaction, args) => {
         .setColor('#2b2d31')
 
     try {
-        interaction.channel.edit({ name: `${ticket.category}-${client.users.cache.get(ticket.creator).tag}` });
-        interaction.channel.permissionOverwrites.edit(ticket.creator, { SendMessages: true })
+        await interaction.channel.edit({ name: `${ticket.category}-${client.users.cache.get(ticket.creator).tag}` });
+        await interaction.channel.permissionOverwrites.edit(ticket.creator, { SendMessages: true })
         for (const user of ticket.usersAdded) {
             interaction.channel.permissionOverwrites.edit(user, { SendMessages: true });
         }

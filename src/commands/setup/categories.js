@@ -83,7 +83,7 @@ module.exports = async (client, interaction, args) => {
         }
 
         case 'list': {
-            const categories = guildSettings.tickets.categories.map(category => `**${category.label}** - ${category.value} - ${category.queueStatus ? '✅' : '❌'} - ${interaction.guild.channels.cache.get(category.category)}`).join('\n');
+            const categories = guildSettings.tickets.categories.map(category => `**${category.label}** - ${category.value} - ${category.queueStatus ? '✅' : '❌'} ${category.hidden ? 'NON VISIBILE' : '👁️'} - ${interaction.guild.channels.cache.get(category.category)}`).join('\n');
             interaction.reply({ content: `**Ticket Categories**\n${categories}`, ephemeral: true });
             break;
         }

@@ -32,6 +32,7 @@ module.exports = async (client, message) => {
                                     ].join('\n'), inline: true
                                 },
                                 { name: `Devi segnalare un utente?`, value: `Usa il comando </segnala:1206705804196184065> oppure tasto destro sul profilo o sul messaggio dell'utente e seleziona App > Segnala`, inline: false },
+                                { name: `Hai bisogno di assistenza vocale?`, value: `Il Support Team è sempre disponibile per fornire assistenza vocale in caso di necessità durante il giorno. Se vedi un membro dello staff online, puoi collegarti alla stanza <#1228797956795404348> e attendere di essere spostato. Se desideri parlare con una persona specifica, prenota la chiamata qui: <#1228799941271359581>`, inline: false }
                             ]);
 
                         const row = new Discord.ActionRowBuilder()

@@ -5,6 +5,7 @@ module.exports = {
         .setName('giveaway')
         .setDescription('Manage giveaways')
         .setDMPermission(false)
+        .setDefaultMemberPermissions(Discord.PermissionFlagsBits.ManageEvents)
         .addSubcommand(addSubcommand => addSubcommand
             .setName('create')
             .setDescription('Create a giveaway')
