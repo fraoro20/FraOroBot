@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const settings = require('../../database/models/guildSettings');
 const giveaways = require('../../database/models/giveaways');
 const { giveawayEnd } = require('../../functions/giveaway');
+require('../../functions/permissions');
 
 /**
  * 
