@@ -93,8 +93,8 @@ module.exports = async (client, interaction, args) => {
                     'FraOroBot Ticket Transcript',
                     `Ticket ID: ${ticket.ticketId}`,
                     `Ticket Category: ${ticket.category}`,
-                    `Opened by: ${client.users.cache.get(ticket.creator).tag}`,
-                    `Closed by: ${interaction.user.tag}`,
+                    `Opened by: ${client.users.cache.get(ticket.creator).tag} (${ticket.creator})`,
+                    `Closed by: ${interaction.user.tag} (${interaction.user.id})`,
                     `Closed reason: ${ticket.closedReason}`,
                     `Operator: ${operator ? operator : 'Non assegnato'}`,
                     '────────────────────────────────'

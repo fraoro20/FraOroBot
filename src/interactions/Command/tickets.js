@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const guildSettings = require('../../database/models/guildSettings');
+require('../../functions/permissions');
 
 module.exports = {
     data: new Discord.SlashCommandBuilder()
@@ -154,7 +155,7 @@ module.exports = {
             case 'list': {
                 // Check if the user has the required permissions
                 const guild = await guildSettings.findOne({ guildId: interaction.guild.id });
-                if (!guild.tickets.supportRole.some(role => interaction.member.roles.cache.has(role)))
+                if (!isStaff(client, interaction.user.id))
                     return interaction.reply({ content: 'Errore: Non hai il permesso di eseguire questo comando.', ephemeral: true })
             }
         }

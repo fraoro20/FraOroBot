@@ -91,7 +91,7 @@ module.exports = async (client, interaction, args) => {
             }).save();
 
             const embed = new Discord.EmbedBuilder()
-                .setAuthor({ name: `${ticketCategoryLabel}`, iconURL: interaction.user.avatarURL({ size: 1024 }) })
+                .setAuthor({ name: `${ticketCategoryLabel} #${ticketId}`, iconURL: interaction.user.avatarURL({ size: 1024 }) })
                 .setDescription(`${interaction.user}, spiega il tuo problema in dettaglio e attendi un membro dello staff (${supportRole}) che ti aiuterà.\nSii paziente, i nostri membri dello staff sono volontari e ti aiuteranno il prima possibile.`)
                 .setColor('#2b2d31')
                 .addFields([

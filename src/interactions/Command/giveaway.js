@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+require('../../functions/permissions');
 
 module.exports = {
     data: new Discord.SlashCommandBuilder()
@@ -67,6 +68,15 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        switch (interaction.options.getSubcommand()) {
+            case 'create':
+            case 'end':
+            case 'reroll': {
+                if (!isStaffPlus(client, interaction.user.id)) {
+                    return;
+                }
+            }
+        }
         client.loadSubcommands(client, interaction, args);
     }
 }
